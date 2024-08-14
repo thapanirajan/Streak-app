@@ -35,17 +35,12 @@ body {
   padding: 10px 40px;
   border-radius: 18px;
   border: none;
-  background-color: rgb(0, 42, 255);
-  color: white;
-  outline: 1px solid black;
-  transition: all ease-in-out 0.2s;
   margin-bottom: 2rem;
   cursor: pointer;
+  border: 1px solid;
   box-shadow: 0.5rem 1rem 1rem rgba(0, 0, 0, 0.2);
-  &:hover {
-    outline-offset: 3px;
-    outline: 1.5px solid rgb(0, 42, 255);
-  }
+  background-color: #f0f0f0;
+  color: #333333;
 }
 
 #hide {
@@ -64,6 +59,13 @@ input {
   padding: 10px 15px;
   font: size 1.2rem;
   margin-bottom: 20px;
+  border-color: none;
+}
+
+input:focus {
+  outline: 1px solid rgba(0, 0, 0, 0.4);
+  outline-offset: 1px;
+  border: 1px solid black;
 }
 
 .container {
