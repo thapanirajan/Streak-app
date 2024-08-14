@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Counter</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css"
+      integrity="sha512-MqL4+Io386IOPMKKyplKII0pVW5e+kb+PI/I3N87G3fHIfrgNNsRpzIXEi+0MQC0sR9xZNqZqCYVcC61fL5+Vg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <p class="main-title">Maintain Your streak</p>
+      <button class="btn btns">Create new card</button>
+      <form action="/create" method="post" id="hide">
+        Title:
+        <input type="text" name="title" placeholder="title" required />
+        <button id="btn">Create</button>
+      </form>
+      <div class="allCards">All cards</div>
+      <div class="container">
+        <% for ( let d of data ) { %>
+        <div class="card">
+          <h1 class="title"><%= d.title%></h1>
+          <div class="counter">
+            <small>Streak count: </small> <strong> <%= d.counter %></strong>
+          </div>
+          <div class="button-div">
+            <button class="add"><a href="/add/<%=d.id%>">Add</a></button>
+            <button class="yellow" onclick="return confirmReset()">
+              <a class="reset" href="/reset/<%=d.id%>">Reset</a>
+            </button>
+            <form
+              action="/delete/<%= d.id %>?_method=DELETE"
+              onsubmit="return confirmDelete()"
+              method="Post"
+            >
+              <button class="delete">Delete</button>
+            </form>
+          </div>
+        </div>
+        <% } %>
+      </div>
+    </div>
+    <script>
+      const btn = document.querySelector(".btns");
+      const hide = document.getElementById("hide");
+      btn.addEventListener("click", () => {
+        if (hide.style.display === "" || hide.style.display === "none") {
+          hide.style.display = "block";
+          btn.innerHTML = "Hide Card";
+        } else {
+          hide.style.display = "none";
+          btn.innerHTML = "create new Card";
+        }
+      });
+
+      const confirmDelete = () => {
+        return confirm("Do you want to delete? ");
+      };
+      const confirmReset = () => {
+        return confirm("DO you want to reset ? ");
+      };
+    </script>
+  </body>
+</html>
